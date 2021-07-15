@@ -4,11 +4,10 @@ on: [push]
 jobs:
   run:
     runs-on: [ubuntu-latest]
-    container: docker://hhurchand/bded_neptune:latest
     steps:
       - uses: actions/checkout@v2
       - name: cml_run
         env:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          echo "done"
+            docker run hhurchand/bded_neptune:latest
