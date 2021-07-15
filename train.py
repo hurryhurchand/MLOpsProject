@@ -13,15 +13,11 @@ from sklearn.impute import SimpleImputer
 import pickle
 
 ###
-
+import neptune.new as neptune
+from neptune.new.types import File
+run = neptune.init(api_token="eyJhcGlfYWRkcmVzcyI6Imh0dHBzOi8vYXBwLm5lcHR1bmUuYWkiLCJhcGlfdXJsIjoiaHR0cHM6Ly9hcHAubmVwdHVuZS5haSIsImFwaV9rZXkiOiI2ZDIwNGI1YS02NDZiLTQ2ODctYjcxOS0xNDIxMzQzMWJjM2IifQ==" ,project='h.hurchand/BostonDataBDEB')
 df = pd.read_csv('BostonData.csv',header=0)
 
-
-
-
-
-
-# In[4]:
 
 
 df_correl = df.corr()
@@ -36,11 +32,14 @@ df_correl = df.corr()
 #sns.heatmap(df_correl,annot=True)
 
 
+
+figure, ax = plt.subplots(1, 1, figsize=(5, 5))
 sns.set_color_codes("dark")
-ax = sns.heatmap(df_correl,annot=True)
+ax[0,0] = sns.heatmap(df_correl,annot=True)
 plt.savefig("by_region.png",dpi=80)
 
-
+run["static-img"].upload(neptune.types.File.as_image(figure))
+log_chart("mychart",chart=figure)
 
 from sklearn.preprocessing import StandardScaler
 
@@ -127,11 +126,12 @@ mse = mean_squared_error(y_test, y_pred, squared=False)
 rmse = math.sqrt(mse)
 r2 = r2_score(y_test, y_pred)
 
-import neptune.new as neptune
-from neptune.new.types import File
-run = neptune.init(api_token="eyJhcGlfYWRkcmVzcyI6Imh0dHBzOi8vYXBwLm5lcHR1bmUuYWkiLCJhcGlfdXJsIjoiaHR0cHM6Ly9hcHAubmVwdHVuZS5haSIsImFwaV9rZXkiOiI2ZDIwNGI1YS02NDZiLTQ2ODctYjcxOS0xNDIxMzQzMWJjM2IifQ==" ,project='h.hurchand/BostonDataBDEB')
+
 run['mse'].log(mse)
 run['rmse'].log(rmse)
 run['r2'].log(r2)
+
+run['model/pickled_model'].upload(File.as_pickle(model.pkl))
+              
 
 #neptune.append_tag('ci-pipeline', os.getenv('NEPTUNE_EXPERIMENT_TAG_ID'))
