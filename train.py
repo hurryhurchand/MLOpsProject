@@ -43,6 +43,7 @@ ax[0,0] = sns.heatmap(df_correl,annot=True)
 plt.savefig("by_region.png",dpi=80)
 
 run["static-img"].upload(neptune.types.File.as_image(figure))
+log_chart("mychart",chart=figure)
 
 from sklearn.preprocessing import StandardScaler
 
