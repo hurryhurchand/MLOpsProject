@@ -33,13 +33,13 @@ df_correl = df.corr()
 
 
 
-figure, ax = plt.subplots(1, 1, figsize=(5, 5))
+figure, ax = plt.subplots(1, 1, figsize=(10, 8))
 sns.set_color_codes("dark")
-ax[0,0] = sns.heatmap(df_correl,annot=True)
+sns.heatmap(ax = ax[0],df_correl,annot=True)
 plt.savefig("by_region.png",dpi=80)
 
 run["static-img"].upload(neptune.types.File.as_image(figure))
-log_chart("mychart",chart=figure)
+
 
 from sklearn.preprocessing import StandardScaler
 
