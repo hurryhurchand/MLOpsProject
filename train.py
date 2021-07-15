@@ -36,11 +36,13 @@ df_correl = df.corr()
 #sns.heatmap(df_correl,annot=True)
 
 
+
+figure, ax = plt.subplots(1, 1, figsize=(5, 5))
 sns.set_color_codes("dark")
-ax = sns.heatmap(df_correl,annot=True)
+ax[0,0] = sns.heatmap(df_correl,annot=True)
 plt.savefig("by_region.png",dpi=80)
 
-
+run["static-img"].upload(neptune.types.File.as_image(figure))
 
 from sklearn.preprocessing import StandardScaler
 
@@ -134,7 +136,7 @@ run['mse'].log(mse)
 run['rmse'].log(rmse)
 run['r2'].log(r2)
 
-run['model/pickled_model'].upload(File.as_pickle(model))
+run['model/pickled_model'].upload(File.as_pickle(model.pkl))
               
 
 #neptune.append_tag('ci-pipeline', os.getenv('NEPTUNE_EXPERIMENT_TAG_ID'))
