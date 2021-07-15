@@ -1,0 +1,8 @@
+name: boston
+
+on: [push]
+jobs:
+  run:
+    runs-on: [ubuntu-latest]
+    container: docker://hhurchand/bded_neptune:latest
+
