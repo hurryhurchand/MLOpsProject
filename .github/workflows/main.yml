@@ -10,4 +10,6 @@ jobs:
         env:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
         run: |
-            docker run hhurchand/bded_neptune:latest
+            docker build -t hhurchand/bdebneptunelocal:latest .
+            docker run  hhurchand/bdebneptunelocal:latest
+#            docker run hhurchand/bded_neptune:latest
