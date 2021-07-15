@@ -105,9 +105,6 @@ rmse = math.sqrt(mse)
 r2 = r2_score(y_test, y_pred)
 
 
-figure, ax = plt.subplots(1, 1, figsize=(10, 8))
-sns.residplot(X_train,y_train)
-run["static-img"].upload(neptune.types.File.as_image(figure))
 
 # In[17]:
 
