@@ -34,7 +34,7 @@ df_correl = df.corr()
 
 
 
-figure, ax = plt.subplots(1, 1, figsize=(10, 8))
+figure, ax = plt.subplots(1, 1, figsize=(12, 8))
 sns.set_color_codes("dark")
 sns.heatmap(df_correl,annot=True)
 plt.savefig("by_region.png",dpi=80)
