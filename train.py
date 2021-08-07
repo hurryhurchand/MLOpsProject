@@ -16,6 +16,8 @@ import pickle
 ###
 #### import neptune.new as neptune
 import neptune
+neptune.init(api_token="eyJhcGlfYWRkcmVzcyI6Imh0dHBzOi8vYXBwLm5lcHR1bmUuYWkiLCJhcGlfdXJsIjoiaHR0cHM6Ly9hcHAubmVwdHVuZS5haSIsImFwaV9rZXkiOiI2ZDIwNGI1YS02NDZiLTQ2ODctYjcxOS0xNDIxMzQzMWJjM2IifQ==",
+            project_qualified_name='h.hurchand/BostonDataBDEB')
 #### from neptune.new.types import File
 #### run = neptune.init(api_token="eyJhcGlfYWRkcmVzcyI6Imh0dHBzOi8vYXBwLm5lcHR1bmUuYWkiLCJhcGlfdXJsIjoiaHR0cHM6Ly9hcHAubmVwdHVuZS5haSIsImFwaV9rZXkiOiI2ZDIwNGI1YS02NDZiLTQ2ODctYjcxOS0xNDIxMzQzMWJjM2IifQ==" ,project='h.hurchand/BostonDataBDEB')
 df = pd.read_csv('BostonData.csv',header=0)
