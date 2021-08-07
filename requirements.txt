@@ -3,5 +3,5 @@ sklearn
 pandas
 seaborn
 matplotlib
-neptune-client==0.4.125
+neptune-client>=0.9.8
 neptune-contrib==0.24.8
