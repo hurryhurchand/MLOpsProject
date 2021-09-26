@@ -1,4 +1,5 @@
-Projet d'intégration continue : BDEB
+Projet d'intégration continue : SET UP AN AI CONTINUOUS INTEGRATION INFRASTRUCTURE FOR AN ML CODE
+
 H Hurchand : Final projet College Bois de Boulogne
 Class : Mettre surplace une infrastructure AI
 __________________________________________________________________________
