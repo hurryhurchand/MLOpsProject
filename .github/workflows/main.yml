@@ -13,3 +13,4 @@ jobs:
             echo "Run docker"
             docker build -t hhurchand/bdebneptunelocal:latest .
             docker run  hhurchand/bdebneptunelocal:latest
+

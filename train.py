@@ -1,3 +1,6 @@
+# Test code for continuous integration
+# H Hurchand
+import os
 import pandas as pd 
 import numpy as np
 from sklearn.linear_model import LogisticRegression
@@ -12,10 +15,11 @@ import matplotlib.pyplot as plt
 from sklearn.impute import SimpleImputer
 import pickle
 
-###
+
 import neptune.new as neptune
 from neptune.new.types import File
 run = neptune.init(api_token="eyJhcGlfYWRkcmVzcyI6Imh0dHBzOi8vYXBwLm5lcHR1bmUuYWkiLCJhcGlfdXJsIjoiaHR0cHM6Ly9hcHAubmVwdHVuZS5haSIsImFwaV9rZXkiOiI2ZDIwNGI1YS02NDZiLTQ2ODctYjcxOS0xNDIxMzQzMWJjM2IifQ==" ,project='h.hurchand/BostonDataBDEB')
+
 df = pd.read_csv('BostonData.csv',header=0)
 
 
@@ -33,13 +37,14 @@ df_correl = df.corr()
 
 
 
-figure, ax = plt.subplots(1, 1, figsize=(5, 5))
+
+figure, ax = plt.subplots(1, 1, figsize=(12, 10))
 sns.set_color_codes("dark")
-ax[0,0] = sns.heatmap(df_correl,annot=True)
+sns.heatmap(df_correl,annot=True)
 plt.savefig("by_region.png",dpi=80)
 
 run["static-img"].upload(neptune.types.File.as_image(figure))
-log_chart("mychart",chart=figure)
+
 
 from sklearn.preprocessing import StandardScaler
 
@@ -86,7 +91,7 @@ y = df0["MEDV"]
 # In[15]:
 
 
-X_train,X_test,y_train,y_test = train_test_split(X,y,test_size=0.4)
+X_train,X_test,y_train,y_test = train_test_split(X,y,test_size=0.3)
 
 
 # In[16]:
@@ -102,6 +107,8 @@ import math
 mse = mean_squared_error(y_test, y_pred, squared=False)
 rmse = math.sqrt(mse)
 r2 = r2_score(y_test, y_pred)
+
+
 
 # In[17]:
 
@@ -127,11 +134,11 @@ rmse = math.sqrt(mse)
 r2 = r2_score(y_test, y_pred)
 
 
+
 run['mse'].log(mse)
 run['rmse'].log(rmse)
 run['r2'].log(r2)
 
-run['model/pickled_model'].upload(File.as_pickle(model.pkl))
+run['model/pickled_model'].upload(File.as_pickle(model))
               
 
-#neptune.append_tag('ci-pipeline', os.getenv('NEPTUNE_EXPERIMENT_TAG_ID'))
